@@ -1,0 +1,44 @@
+All Tables 
+
+1. Table: User 
+    Fill            Fill Type 
+    - name          string 
+    - email         string 
+    - password      string
+
+2. Table: Store
+    Fill            Fill Type 
+    - name          string 
+    - image         string 
+    - amount        integer
+    - price_buy     integer 
+    - price_sell    integer 
+
+3. Table: Transection 
+    Fill            Fill Type 
+    - tran_id       string 
+    - tran_type     string 
+    - product_id    integer 
+    - amount        integer
+    - price         integer 
+    - trab_detail   string 
+
+4. Table: Bill 
+    Fill            Fill Type 
+    - bill_id       string 
+    - customer_name string 
+    - customer_tel  string 
+
+5. Table: Bill_list 
+    Fill            Fill Type 
+    - bill_id       string 
+    - name          string 
+    - amount        integer 
+    - price         integer 
+
+List Controller 
+    - BillController        ຈັດການຂໍ້ມູນກ່ຽວກັບໃບບິນ
+    - StoreController       ຈັດການກ່ຽວກັບ ລາຍການສະຕ໋ອກສິນຄ້າ
+    - TransectionController ຈັດການກ່ຽວກັບ ລາຍການທຸລະກຳທີ່ເກີດຂື້ນ
+    - UserController        ຈັດການກ່ຽວກັບ ຜູ້ໃຊ້
+    - ReportController      ຈັດການກ່ຽວກັບ ລະບົບລາຍງານ 

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css">
     <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css">
     <link rel="stylesheet" href="assets/css/demo.css">
+    <link rel="stylesheet" href="assets/css/font_lao.css">
 
     @vite('resources/css/app.css')
 </head>

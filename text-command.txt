@@ -16,3 +16,11 @@ Git
     - git commit -m "ຄຳອະທິບາຍ"  : ຄຳສັ່ງ commit 
     - git push                  : ຄຳສັ່ງ ອັບໂຫລດໂປຼເຈັກ ຂື້ນ github
     - git pull                  : ຄຳສັ່ງ ອັບເດດ ຊ໋ອດໂຄດລ່າສຸດຈາກ github
+
+    - git add . && git commit -m "ຂໍ້ຄວາມ" && git push
+
+ຕິດຕັ້ງ JWT ສຳລັບ Laravel 
+
+- composer require php-open-source-saver/jwt-auth
+- php artisan vendor:publish --provider="PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider"
+- php artisan jwt:secret

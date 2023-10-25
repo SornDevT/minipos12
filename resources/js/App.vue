@@ -120,9 +120,9 @@
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
+                <a class="dropdown-item" href="javascript:void(0);" @click="Logout()">
                   <i class="bx bx-power-off me-2"></i>
-                  <span class="align-middle">Log Out</span>
+                  <span class="align-middle">ອອກຈາກລະບົບ</span>
                 </a>
               </li>
             </ul>
@@ -203,6 +203,7 @@
 
 <script>
 import { useStore } from './store/auth';
+import axios from 'axios';
 export default {
     name: 'Minipos12App',
     setup(){
@@ -220,7 +221,20 @@ export default {
     },
 
     methods: {
-        
+      Logout(){
+          axios.get('api/logout',{ headers:{ Authorization: 'Bearer '+ this.store.get_token}}).then((res)=>{
+              if(res.data.success){
+                // ເຄຍຂໍ້ມູນການເຂົ້າລະບົບ
+                localStorage.removeItem('web_token');
+                localStorage.removeItem('web_user');
+                this.store.remove_token();
+                this.store.remove_user();
+                this.$router.push('/login');
+              }
+          }).catch((err)=>{
+              console.log(err)
+          })
+      }
     },
 };
 </script>

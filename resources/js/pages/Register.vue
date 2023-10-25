@@ -73,6 +73,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
     name: 'Minipos12Register',
 
@@ -105,6 +108,32 @@ export default {
 
                     // ກວດຊອບຖຶກຕ້ອງ
 
+                  axios.post('api/register',{
+                    from_user_name: this.user_name,
+                    from_email: this.email,
+                    from_password: this.password
+                  }).then((res)=>{
+                    console.log(res);
+
+                    if(res.data.success){
+                      this.show_error = false;
+                      this.text_error = '';
+                      
+                      this.user_name = '';
+                      this.email = '';
+                      this.password = '';
+                      this.password2 = '';
+
+                      this.$router.push('/login');
+
+                    } else {
+                      this.show_error = true;
+                      this.text_error = res.data.message;
+                    }
+
+                  }).catch((err)=>{
+                    console.log(err);
+                  });
                     
 
 

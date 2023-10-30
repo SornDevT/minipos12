@@ -32,7 +32,7 @@
                 
               </div>
               <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" v-model="password" name="password" placeholder="········" aria-describedby="password">
+                <input type="password" id="password" class="form-control" v-model="password" @keyup.enter="Login()" name="password" placeholder="········" aria-describedby="password">
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
             </div>

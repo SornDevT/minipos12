@@ -75,20 +75,23 @@ class UserController extends Controller
     public function logout(){
 
 
-        Auth::logout();
-        return response()->json([
-            'success' => true,
-            'message' => 'ສຳເລັດ!',
-        ]);
+        // Auth::logout();
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'ສຳເລັດ!',
+        // ]);
 
-        // $token = Auth::getToken();
-        // $invalidate = Auth::invalidate($token);
-        // if($invalidate){
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'ສຳເລັດ!',
-        //     ]);
-        // }
+
+        // JWTAuth::getToken()
+
+        $token = JWTAuth::getToken();
+        $invalidate = JWTAuth::invalidate($token);
+        if($invalidate){
+            return response()->json([
+                'success' => true,
+                'message' => 'ສຳເລັດ!',
+            ]);
+        }
 
     }
 

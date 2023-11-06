@@ -26,6 +26,7 @@ Route::get('logout',[UserController::class,'logout']);
 
 Route::controller(StoreController::class)->group(function (){
     Route::get('store','index');
+    Route::get('store_pos','index_pos');
     Route::get('store/edit/{id}','edit');
     Route::post('store/add','add');
     Route::post('store/update/{id}','update');

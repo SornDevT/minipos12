@@ -85,6 +85,7 @@
         <thead>
           <tr>
             <th width="60" class="text-center">ID</th>
+            <th class="text-center" width="120">ຮູບພາບ</th>
             <th>ຊື່ສິນຄ້າ</th>
             <th class="text-center" width="80">ຈຳນວນ</th>
             <th class="text-center" width="180">ລາຄາຊື້</th>
@@ -104,6 +105,11 @@
         <tbody v-else>
           <tr v-for="list in StoreData.data" :key="list.id">
             <td class="text-center">{{ list.id }}</td>
+            <td class="text-center">
+                <!-- {{ list.image }} -->
+                <img :src="url + '/assets/img/'+list.image" v-if="list.image" alt="" class=" rounded w-100" srcset="">
+                <img :src="url + '/assets/img/img.jpg'" v-else alt="" class=" rounded w-100" srcset="">
+            </td>
             <td >{{ list.name }}</td>
             <td class="text-center">{{ formatPrice(list.amount) }}</td>
             <td class=" text-end">{{ formatPrice(list.price_buy) }}</td>
@@ -166,7 +172,8 @@ export default {
                   numeralDecimalMark: ',',
                   delimiter: '.'
             },
-            image_pre: window.location.origin + '/assets/img/img.jpg'
+            image_pre: window.location.origin + '/assets/img/img.jpg',
+            url: window.location.origin
         };
     },
     components:{
@@ -235,6 +242,8 @@ export default {
             this.FormStore.amount = '';
             this.FormStore.price_buy = '';
             this.FormStore.price_sell = '';
+            this.FormStore.image = '';
+            this.image_pre = window.location.origin + '/assets/img/img.jpg';
             this.ShowForm = true;
             this.FormType = true;
         },
@@ -249,6 +258,13 @@ export default {
                     
                     this.FormStore = res.data;
                     this.ShowForm = true;
+
+                    // ອ່ານ-ສະແດງຮູບພາບ
+                    if(res.data.image){
+                        this.image_pre = window.location.origin + "/assets/img/" + res.data.image;
+                    } else {
+                        this.image_pre = window.location.origin + "/assets/img/img.jpg";
+                    }
 
                 }).catch((error)=>{
                     console.log(error);

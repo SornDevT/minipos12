@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->string('bill_id');
-            $table->string('customer_name');
-            $table->string('customer_tel');
+            $table->string('customer_name')->nullable();
+            $table->string('customer_tel')->nullable();
             $table->timestamps();
         });
     }

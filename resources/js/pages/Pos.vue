@@ -181,6 +181,13 @@ export default {
         Pay(){
             $("#dialog_pay").modal("show");
         },
+        async openLink(link){
+            const response = await fetch(`${link}`,{ headers:{ Authorization: 'Bearer '+ this.store.get_token}});
+            const html = await response.text();
+            const blob = new Blob([html],{ type: "text/html"});
+            const blobUrl = URL.createObjectURL(blob);
+            window.open(blobUrl, "_blank");
+        },
         ConfirmPay(){
 
             axios.post('api/transection/add', {
@@ -197,6 +204,10 @@ export default {
                         this.CashAmount = "";
                         $("#dialog_pay").modal("hide");
                         this.GetStore();
+
+                        // ເປີດລີ້ງ
+                        // window.open(window.location.origin+'/api/bills/print/'+res.data.bill_id)
+                        this.openLink(window.location.origin+'/api/bills/print/'+res.data.bill_id)
 
                         this.$swal({
                         toast:true,
@@ -247,10 +258,23 @@ export default {
             // console.log(id);
             let item = this.StoreData.data.find((i)=>i.id == id);
             if(item.amount>0){
+
                     let list_order_item = this.ListOrder.find((i)=>i.id == id);
                     if(list_order_item){
 
-                        list_order_item.order_amount++;
+                        if((item.amount - list_order_item.order_amount)>0){
+                            list_order_item.order_amount++;
+                        } else{
+                            this.$swal({
+                                icon: 'error',
+                                title: 'ບໍ່ສາມາດຂາຍໄດ້',
+                                text: 'ສິນຄ້າດັ່ງກ່າວໝົດແລ້ວ!',
+                                showConfirmButton: false,
+                                timer: 3500
+                                });
+                        }
+
+                        
 
                     } else {
                         this.ListOrder.push({
@@ -261,7 +285,13 @@ export default {
                         });
                     }
             } else {
-
+                this.$swal({
+                        icon: 'error',
+                        title: 'ບໍ່ສາມາດຂາຍໄດ້',
+                        text: 'ສິນຄ້າດັ່ງກ່າວໝົດແລ້ວ!',
+                        showConfirmButton: false,
+                        timer: 3500
+                        });
             }
             
         },

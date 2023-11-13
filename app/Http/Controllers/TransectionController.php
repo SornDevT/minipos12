@@ -16,6 +16,40 @@ class TransectionController extends Controller
         $this->middleware('auth:api');
     }
 
+    public function index(Request $request){
+
+        $sort = \Request::get('sort');
+        $per_page = \Request::get('per_page');
+        $month_type = $request->month_type;
+        $dmy = $request->dmy;
+        // 13/11/2023
+        // 2023-11-13
+        $m = explode("-",$dmy)[1];
+        $y = explode("-",$dmy)[0];
+
+        if($month_type == 'm'){
+            // ຂໍ້ມູນເດືອນ
+
+            $tran = Transection::orderBy('id',$sort)
+            ->whereYear("created_at",$y)
+            ->whereMonth("created_at",$m)
+            ->paginate($per_page)
+            ->toArray();
+
+        } else if($month_type == 'y') {
+            // ຂໍ້ມູນປີ
+
+            $tran = Transection::orderBy('id',$sort)
+            ->whereYear("created_at",$y)
+            ->paginate($per_page)
+            ->toArray();
+
+        }
+
+        return array_reverse($tran);
+
+    }
+
     public function add(Request $request){
 
         try {

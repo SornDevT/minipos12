@@ -36,7 +36,7 @@ Route::controller(StoreController::class)->group(function (){
 });
 
 Route::controller(TransectionController::class)->group(function (){
-    Route::get('transection','index');
+    Route::post('transection','index');
     Route::get('transection/edit/{id}','edit');
     Route::post('transection/add','add');
     Route::post('transection/update/{id}','update');

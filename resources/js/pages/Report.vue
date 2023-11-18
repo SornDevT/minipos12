@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <div class=" d-flex justify-content-between">
                             <span> <i class='bx bx-download fs-4'></i> <br> ລາຍຮັບ </span>
-                            <span> </span>
+                            <span> {{ formatPrice(sum_income) }} ກີບ </span>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class=" d-flex justify-content-between">
                             <span> <i class='bx bx-trending-down fs-4'></i> <br> ລາຍຈ່າຍ </span>
-                            <span>  </span>
+                            <span> {{ formatPrice(sum_expense) }} ກີບ  </span>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <div class=" d-flex justify-content-between">
                             <span> <i class='bx bxs-objects-vertical-bottom fs-4'></i> <br> ກຳໄລ </span>
-                            <span>  </span>
+                            <span> {{ formatPrice(sum_income-sum_expense) }} ກີບ </span>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,8 @@ export default {
     },
     data() {
         return {
-
+            sum_income:0,
+            sum_expense:0,
             month_type:'m',
             dmy: new Date().toISOString().slice(0,10),
             // testData:{
@@ -151,6 +152,9 @@ export default {
                     ]
                   }
 
+                  this.sum_income = res.data.sum_income
+                  this.sum_expense = res.data.sum_expense
+
                     }).catch((error)=>{
                         console.log(error);
                         if(error){
@@ -165,6 +169,17 @@ export default {
                     });
         }
     },
+    created(){
+        this.CreatedReport()
+    },
+    watch:{
+        dmy(){
+            this.CreatedReport()
+        },
+        month_type(){
+            this.CreatedReport()
+        }
+    }
 };
 </script>
 

@@ -126,7 +126,7 @@
         </tbody>
       </table>
             <Pagination :pagination="StoreData" :offset="4" @paginate="GetStore($event)" />
-            <button @click="showAlert">Hello world</button>
+            <!-- <button @click="showAlert">Hello world</button> -->
     </div>
   </div>
 </div>
